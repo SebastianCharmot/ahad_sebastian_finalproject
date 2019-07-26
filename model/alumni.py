@@ -3,8 +3,8 @@ from pprint import pprint
 client = MongoClient("mongodb+srv://ahadbadruddin:fuckthisshit@bytefinalproject-5nqms.mongodb.net/test?retryWrites=true&w=majority")
 db=client.finalProject
 
-class Student():
-
+class Alumni():
+    
     def __init__(self, **kwargs):
         self.id = kwargs.get('_id')
         self.name = kwargs.get('name')
@@ -15,11 +15,11 @@ class Student():
         self.image = kwargs.get('image')
         self.projects = kwargs.get('projects',[])
         self.bio = kwargs.get('bio')
-        self.major = kwargs.get('major')
+        self.contribution = kwargs.get('contribution',0)
 
     @classmethod
     def findUser(cls,username,password):
-        object_ = db.Students.find_one({
+        object_ = db.Alumni.find_one({
             'username': username,
             'password': password
             })
@@ -28,7 +28,7 @@ class Student():
     
 
     def save(self):
-        studentUser = {
+        alumniUser = {
             'name' : self.name,
             'username' : self.username,
             'password' : self.password,
@@ -37,23 +37,26 @@ class Student():
             'image': self.image,
             'projects': self.projects,
             'bio': self.bio,
-            'major': self.major
+            'contribution': self.contribution
             }
-        if(db.Students.find_one({
+        if(db.Alumni.find_one({
             'username': self.username,
             'password': self.password
             })):
-            updateOb= db.Students.update_one({
+            updateOb= db.Alumni.update_one({
             'username': self.username,
             'password': self.password
-            }, { "$set": studentUser })
+            }, { "$set": alumniUser })
         else:
-            result=db.Students.insert_one(studentUser)
+            result=db.Alumni.insert_one(alumniUser)
 
     def addproject(self,projectTitle):
         self.projects.append(projectTitle)
         self.save()
 
+    def addContribution(self, amount):
+        self.contribution += amount
+        self.save()
 
         
         

@@ -24,7 +24,12 @@ class TestStudent(TestCase):
         mike.save()
         mike2 = Student.findUser('mikebloom', 'password' )
         self.assertEqual(mike2.class_,'1900',"Object returned has correct properties")
+
     def testAddProject(self):
+        john = Student.findUser('mutantseabass', 'password' )
+        john.projects.append('*non bogus startup idea*')
+        john.save()
+
         
 
 
