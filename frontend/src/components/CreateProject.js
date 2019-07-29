@@ -1,20 +1,6 @@
-import React from 'react';
-import './App.css';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-// import Navbar from './components/Navbar';
 
 
 
-export default class App extends React.Component {
-
-  render() {
-
-  return (
-
-    <div className="App">
 <Container>
 <Row>
 <Form>
@@ -49,11 +35,3 @@ export default class App extends React.Component {
 </Form>
 </Row>
 </Container>
-    </div>
-
-
-
-  );
-}
-
-}
